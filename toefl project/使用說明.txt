@@ -1,0 +1,7 @@
+使用前記得安裝Chromedriver到Python的資料夾裡！
+https://chromedriver.chromium.org/downloads/version-selection
+要和Chrome瀏覽器同版本
+
+Toefl.py為主程式
+
+Test.py用途為，當主程式跑到一半crash，可以用test.py讀取data.txt裡已經寫入的內容。
