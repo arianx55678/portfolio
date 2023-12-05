@@ -11,3 +11,5 @@
 5.記得在pic.json輸入TOKEN
 
 6.pip install discord
+7.pip install reactionmenu
+8.pip install requests
