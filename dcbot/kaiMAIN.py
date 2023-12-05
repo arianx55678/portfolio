@@ -24,7 +24,7 @@ async def pic (ctx):
     pic = discord.File(randompic)
     await ctx.send(file=pic)
 
-@bot.command()    #kais gallery
+@bot.command()    #kais gallery 參考https://github.com/Defxult/reactionmenu
 async def kg(ctx: commands.Context):
     menu = ViewMenu(ctx, menu_type=ViewMenu.TypeEmbed,rows_requested = 3, remove_items_on_timeout=True, delete_interactions=True)
     back_button = ViewButton(style=discord.ButtonStyle.primary, label='', custom_id=ViewButton.ID_PREVIOUS_PAGE, emoji='<:emoji_32:878318476773687376>')
