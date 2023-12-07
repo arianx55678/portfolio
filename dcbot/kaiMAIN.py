@@ -8,6 +8,8 @@ from reactionmenu import ReactionMenu, ReactionButton
 from reactionmenu import ViewMenu, ViewButton, ViewSelect ,Page
 from aternosapi import AternosAPI
 import os
+import time
+import count
 
 with open('pic.json','r',encoding='utf8') as jfile:
     config = json.load(jfile)
@@ -46,12 +48,34 @@ async def kg(ctx: commands.Context):
         embed.set_footer(text=f"Requested by {ctx.author}", icon_url = ctx.author.avatar)
     await menu.start()
 
-# @bot.command()
-# async def upload(ctx,message):
-#     cahnnel = bot.get_channel(1181519641332416582)
-#     if ctx.channel == cahnnel:
-#         message.attachments
+@bot.event
+async def on_message(message):
+    await bot.process_commands(message)
+    cahnnel = bot.get_channel(1181610361108041901)
+    dir=os.path.join(os.path.dirname(__file__),'not_only_for_kai')
+    if message.channel != cahnnel:
+        return
+    if message.author.id == bot.user.id:
+        return
+    if message.attachments:
+        max_amount = 100
+        if count.count() >= max_amount:
+            time.sleep(1)
+            await bot.get_channel(1181610361108041901).send("資料夾滿了")
+            return
+        for attachments in message.attachments:
+            print(attachments)
+            image_format =['.jpeg', '.png','.jpg']
+            ext = os.path.splitext(attachments.filename)[-1]
+            if ext in image_format:
+                # await attachments.save(attachments.filename)
+                await attachments.save(os.path.join(dir,attachments.filename))
+                await bot.get_channel(1181610361108041901).send(f"上傳成功:剩餘{max_amount-count.count()}空閒欄位")
 
-
+@bot.command() #picture(not only kai)
+async def nfk (ctx):
+    randompic = random.choice(config['pic_not_only_for_kai'])
+    pic = discord.File(randompic)
+    await ctx.send(file=pic)
 
 bot.run(config["TOKEN"])
