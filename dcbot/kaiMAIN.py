@@ -48,7 +48,7 @@ async def kg(ctx: commands.Context):
         embed.set_footer(text=f"Requested by {ctx.author}", icon_url = ctx.author.avatar)
     await menu.start()
 
-@bot.event
+@bot.event #上傳檔案
 async def on_message(message):
     await bot.process_commands(message)
     cahnnel = bot.get_channel(1181610361108041901)
